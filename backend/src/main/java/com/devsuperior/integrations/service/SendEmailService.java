@@ -1,6 +1,7 @@
 package com.devsuperior.integrations.service;
 
 import com.devsuperior.integrations.dto.SendEmailDTO;
+import com.devsuperior.integrations.service.exceptions.SendEmailException;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -34,7 +35,7 @@ public class SendEmailService {
             request.setBody(mail.build());
             Response response = sendGrid.api(request);
         }catch (IOException e){
-            e.printStackTrace();
+            throw new SendEmailException(e.getMessage());
         }
 
     }
